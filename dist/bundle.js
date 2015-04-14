@@ -22800,222 +22800,274 @@ module.exports = warning;
 module.exports = require('./lib/React');
 
 },{"./lib/React":30}],158:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var moment = require('moment');
-var Day = require('./Day');
-var CalendarControls = require('./CalendarControls');
-
-var Calendar = React.createClass({
-  displayName: 'Calendar',
-
-  propTypes: {
-    weekOffset: React.PropTypes.number,
-    forceSixRows: React.PropTypes.bool,
-    showDaysOfWeek: React.PropTypes.bool },
-
-  getDefaultProps: function getDefaultProps() {
-    return {
-      weekOffset: 0,
-      forceSixRows: false,
-      showDaysOfWeek: false,
-      onPickDate: null
+(function (global, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define(['exports'], factory);
+  } else if (typeof exports !== 'undefined') {
+    factory(exports);
+  } else {
+    var mod = {
+      exports: {}
     };
-  },
-
-  getInitialState: function getInitialState() {
-    if (this.props.date instanceof Date) {
-      this.props.date = moment(this.props.date);
-    }
-    return {
-      date: this.props.date || moment() };
-  },
-
-  next: function next() {
-    this.setState({ date: this.state.date.add(1, 'months') });
-  },
-
-  prev: function prev() {
-    this.setState({ date: this.state.date.subtract(1, 'months') });
-  },
-
-  days: function days() {
-    var days = [];
-    var date = this.state.date.startOf('month');
-    var diff = date.weekday() - this.props.weekOffset;
-    if (diff < 0) diff += 7;
-
-    var i, day;
-    for (i = 0; i < diff; i++) {
-      day = moment([this.state.date.year(), this.state.date.month(), i - diff + 1]);
-      days.push({ day: day, classes: 'prev-month' });
-    }
-
-    var numberOfDays = date.daysInMonth();
-    for (i = 1; i <= numberOfDays; i++) {
-      day = moment([this.state.date.year(), this.state.date.month(), i]);
-      days.push({ day: day });
-    }
-
-    i = 1;
-    while (days.length % 7 !== 0) {
-      day = moment([this.state.date.year(), this.state.date.month(), numberOfDays + i]);
-      days.push({ day: day, classes: 'next-month' });
-      i++;
-    }
-
-    if (this.props.forceSixRows && days.length !== 42) {
-      var start = moment(days[days.length - 1].date).add(1, 'days');
-      while (days.length < 42) {
-        days.push({ day: moment(start), classes: 'next-month' });
-        start.add(1, 'days');
-      }
-    }
-
-    return days;
-  },
-
-  daysOfWeek: function daysOfWeek() {
-    var daysOfWeek = this.props.daysOfWeek;
-    if (!daysOfWeek) {
-      daysOfWeek = [];
-      for (var i = 0; i < 7; i++) {
-        daysOfWeek.push(moment().weekday(i).format('dd').charAt(0));
-      }
-    }
-    return daysOfWeek;
-  },
-
-  render: function render() {
-    var _this = this;
-
-    var now = new moment();
-    var today = now.format('YYYY-MM-DD');
-    console.log(today, 'today');
-    return React.createElement(
-      'div',
-      { className: 'clndr' },
-      React.createElement(CalendarControls, { date: this.state.date, onNext: this.next, onPrev: this.prev }),
-      React.createElement(
-        'div',
-        { className: 'clndr-grid' },
-        React.createElement(
-          'div',
-          { className: 'day-headers' },
-          this.props.showDaysOfWeek && this.daysOfWeek().map(function (day, i) {
-            return React.createElement(
-              'div',
-              { key: 'weekday-' + i },
-              day
-            );
-          })
-        ),
-        React.createElement(
-          'div',
-          { className: 'days' },
-          this.days().map(function (day, i) {
-            day.classes = [day.day.format('YYYY-MM-DD')];
-            if (day.day.isSame(today)) {
-
-              day.classes.push('today');
-            }
-            return React.createElement(Day, { key: 'day-' + i, day: day, onClick: _this.props.onPickDate });
-          })
-        ),
-        React.createElement('div', { className: 'clearfix' })
-      )
-    );
+    factory(mod.exports);
+    global.Calendar = mod.exports;
   }
-});
+})(this, function (exports) {
+  'use strict';
 
-module.exports = Calendar;
+  var React = require('react');
+  var moment = require('moment');
+  var Day = require('./Day');
+  var CalendarControls = require('./CalendarControls');
+
+  var Calendar = React.createClass({
+    displayName: 'Calendar',
+
+    propTypes: {
+      weekOffset: React.PropTypes.number,
+      forceSixRows: React.PropTypes.bool,
+      showDaysOfWeek: React.PropTypes.bool },
+
+    getDefaultProps: function getDefaultProps() {
+      return {
+        weekOffset: 0,
+        forceSixRows: false,
+        showDaysOfWeek: false,
+        onPickDate: null
+      };
+    },
+
+    getInitialState: function getInitialState() {
+      if (this.props.date instanceof Date) {
+        this.props.date = moment(this.props.date);
+      }
+      return {
+        date: this.props.date || moment() };
+    },
+
+    next: function next() {
+      this.setState({ date: this.state.date.add(1, 'months') });
+    },
+
+    prev: function prev() {
+      this.setState({ date: this.state.date.subtract(1, 'months') });
+    },
+
+    days: function days() {
+      var days = [];
+      var date = this.state.date.startOf('month');
+      var diff = date.weekday() - this.props.weekOffset;
+      if (diff < 0) diff += 7;
+
+      var i, day;
+      for (i = 0; i < diff; i++) {
+        day = moment([this.state.date.year(), this.state.date.month(), i - diff + 1]);
+        days.push({ day: day, classes: 'prev-month' });
+      }
+
+      var numberOfDays = date.daysInMonth();
+      for (i = 1; i <= numberOfDays; i++) {
+        day = moment([this.state.date.year(), this.state.date.month(), i]);
+        days.push({ day: day });
+      }
+
+      i = 1;
+      while (days.length % 7 !== 0) {
+        day = moment([this.state.date.year(), this.state.date.month(), numberOfDays + i]);
+        days.push({ day: day, classes: 'next-month' });
+        i++;
+      }
+
+      if (this.props.forceSixRows && days.length !== 42) {
+        var start = moment(days[days.length - 1].date).add(1, 'days');
+        while (days.length < 42) {
+          days.push({ day: moment(start), classes: 'next-month' });
+          start.add(1, 'days');
+        }
+      }
+
+      return days;
+    },
+
+    daysOfWeek: function daysOfWeek() {
+      var daysOfWeek = this.props.daysOfWeek;
+      if (!daysOfWeek) {
+        daysOfWeek = [];
+        for (var i = 0; i < 7; i++) {
+          daysOfWeek.push(moment().weekday(i).format('dd').charAt(0));
+        }
+      }
+      return daysOfWeek;
+    },
+
+    render: function render() {
+      var _this = this;
+
+      var now = new moment();
+      var today = now.format('YYYY-MM-DD');
+      console.log(today, 'today');
+      return React.createElement(
+        'div',
+        { className: 'clndr' },
+        React.createElement(CalendarControls, { date: this.state.date, onNext: this.next, onPrev: this.prev }),
+        React.createElement(
+          'div',
+          { className: 'clndr-grid' },
+          React.createElement(
+            'div',
+            { className: 'day-headers' },
+            this.props.showDaysOfWeek && this.daysOfWeek().map(function (day, i) {
+              return React.createElement(
+                'div',
+                { key: 'weekday-' + i },
+                day
+              );
+            })
+          ),
+          React.createElement(
+            'div',
+            { className: 'days' },
+            this.days().map(function (day, i) {
+              day.classes = [day.day.format('YYYY-MM-DD')];
+              if (day.day.isSame(today)) {
+
+                day.classes.push('today');
+              }
+              return React.createElement(Day, { key: 'day-' + i, day: day, onClick: _this.props.onPickDate });
+            })
+          ),
+          React.createElement('div', { className: 'clearfix' })
+        )
+      );
+    }
+  });
+
+  module.exports = Calendar;
+});
 
 },{"./CalendarControls":159,"./Day":160,"moment":2,"react":157}],159:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-
-var CalendarControls = React.createClass({
-  displayName: 'CalendarControls',
-
-  _onNext: function _onNext() {
-    this.props.onNext();
-  },
-
-  _onPrev: function _onPrev() {
-    this.props.onPrev();
-  },
-
-  render: function render() {
-    return React.createElement(
-      'div',
-      { className: 'clndr-controls' },
-      React.createElement(
-        'div',
-        { onClick: this._onPrev },
-        'Prev'
-      ),
-      React.createElement(
-        'div',
-        { className: 'current-month' },
-        this.props.date.format('MMMM YYYY')
-      ),
-      React.createElement(
-        'div',
-        { onClick: this._onNext },
-        'Next'
-      )
-    );
+(function (global, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define(['exports'], factory);
+  } else if (typeof exports !== 'undefined') {
+    factory(exports);
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod.exports);
+    global.CalendarControls = mod.exports;
   }
-});
+})(this, function (exports) {
+  'use strict';
 
-module.exports = CalendarControls;
+  var React = require('react');
+
+  var CalendarControls = React.createClass({
+    displayName: 'CalendarControls',
+
+    _onNext: function _onNext() {
+      this.props.onNext();
+    },
+
+    _onPrev: function _onPrev() {
+      this.props.onPrev();
+    },
+
+    render: function render() {
+      return React.createElement(
+        'div',
+        { className: 'clndr-controls' },
+        React.createElement(
+          'div',
+          { onClick: this._onPrev },
+          'Prev'
+        ),
+        React.createElement(
+          'div',
+          { className: 'current-month' },
+          this.props.date.format('MMMM YYYY')
+        ),
+        React.createElement(
+          'div',
+          { onClick: this._onNext },
+          'Next'
+        )
+      );
+    }
+  });
+
+  module.exports = CalendarControls;
+});
 
 },{"react":157}],160:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-
-var Day = React.createClass({
-  displayName: 'Day',
-
-  getDefaultProps: function getDefaultProps() {
-    return {
-      classes: []
+(function (global, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define(['exports'], factory);
+  } else if (typeof exports !== 'undefined') {
+    factory(exports);
+  } else {
+    var mod = {
+      exports: {}
     };
-  },
-
-  _onClick: function _onClick() {
-    if (this.props.onClick) this.props.onClick(this.props.day.day);
-  },
-
-  render: function render() {
-    return React.createElement(
-      'div',
-      { onClick: this._onClick, className: this.props.day.classes.join(' ') },
-      React.createElement(
-        'span',
-        { className: 'day-number' },
-        this.props.day.day.date()
-      )
-    );
+    factory(mod.exports);
+    global.Day = mod.exports;
   }
-});
+})(this, function (exports) {
+  'use strict';
 
-module.exports = Day;
+  var React = require('react');
+
+  var Day = React.createClass({
+    displayName: 'Day',
+
+    getDefaultProps: function getDefaultProps() {
+      return {
+        classes: []
+      };
+    },
+
+    _onClick: function _onClick() {
+      if (this.props.onClick) this.props.onClick(this.props.day.day);
+    },
+
+    render: function render() {
+      return React.createElement(
+        'div',
+        { onClick: this._onClick, className: this.props.day.classes.join(' ') },
+        React.createElement(
+          'span',
+          { className: 'day-number' },
+          this.props.day.day.date()
+        )
+      );
+    }
+  });
+
+  module.exports = Day;
+});
 
 },{"react":157}],161:[function(require,module,exports){
-'use strict';
+(function (global, factory) {
+	if (typeof define === 'function' && define.amd) {
+		define(['exports', 'module'], factory);
+	} else if (typeof exports !== 'undefined' && typeof module !== 'undefined') {
+		factory(exports, module);
+	} else {
+		var mod = {
+			exports: {}
+		};
+		factory(mod.exports, mod);
+		global.index = mod.exports;
+	}
+})(this, function (exports, module) {
+	'use strict';
 
-Object.defineProperty(exports, '__esModule', {
-	value: true
+	module.exports = {
+		Calendar: require('./Calendar'),
+		CalendarControls: require('./CalendarControls'),
+		Day: require('./Day')
+	};
 });
-exports['default'] = {
-	Calendar: require('./Calendar'),
-	CalendarControls: require('./CalendarControls'),
-	Day: require('./Day')
-};
-module.exports = exports['default'];
 
 },{"./Calendar":158,"./CalendarControls":159,"./Day":160}]},{},[161]);
