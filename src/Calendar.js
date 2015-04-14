@@ -21,7 +21,13 @@ var Calendar = React.createClass({
       onPickDate: null
     };
   },
-
+  componentWillReceiveProps(nextProps) {
+    if (this.props.date !== nextProps.date) {
+      this.setState({
+        date: this.props.date
+      })
+    }
+  },
   getInitialState: function() {
     if(this.props.date instanceof Date) {
       this.props.date = moment(this.props.date);
