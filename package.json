@@ -6,7 +6,7 @@
     "type": "git",
     "url": "git@github.com:Hanse/react-calendar"
   },
-  "main": "./src/index.js",
+  "main": "./dist/bundle.js",
   "scripts": {
     "test": "make test",
     "prepublish": "browserify -t [babelify --modules umd ] src/index.js -o dist/bundle.js",
