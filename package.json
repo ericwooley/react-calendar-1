@@ -9,7 +9,7 @@
   "main": "./src/index.js",
   "scripts": {
     "test": "make test",
-    "prepublish": "make publish",
+    "prepublish": "browserify -t babelify src/index.js -o dist/bundle.js",
     "watch": "open examples/basic/index.html && cd examples/basic/ && npm run watch "
   },
   "author": "Hanse",
