@@ -95,7 +95,6 @@ var Calendar = React.createClass({
   render: function() {
     var now = new moment();
     var today = now.format('YYYY-MM-DD');
-    console.log(today, 'today');
     return (
       <div className='clndr'>
         <CalendarControls date={this.state.date} onNext={this.next} onPrev={this.prev} />
