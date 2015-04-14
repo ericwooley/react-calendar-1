@@ -16,6 +16,7 @@ var Day = React.createClass({
   },
 
   render: function() {
+    this.props.day.classes.push('day')
     return (
       <div onClick={this._onClick} className={this.props.day.classes.join(' ')}>
         <span className={'day-number'}>{this.props.day.day.date()}</span>
