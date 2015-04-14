@@ -1,9 +1,11 @@
 # react-calendar
 
+This has departed from the original for now, until there is a pull request accepted.
+
 [React](http://facebook.github.io/react/) calendar component inspired by [CLNDR.js](http://kylestetz.github.io/CLNDR/).
 
 ```
-$ npm install react-calendar-component
+$ npm install ericwooley/react-with-calendar
 ```
 
 # See the demo
