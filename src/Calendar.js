@@ -22,9 +22,9 @@ var Calendar = React.createClass({
     };
   },
   componentWillReceiveProps(nextProps) {
-    if (this.props.date !== nextProps.date) {
+    if (!this.props.date.isSame(nextProps.date)) {
       this.setState({
-        date: this.props.date
+        date: nextProps.date
       })
     }
   },
