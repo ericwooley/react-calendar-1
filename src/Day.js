@@ -24,8 +24,10 @@ var Day = React.createClass({
     classes += ' day'+' day-'+this.props.day.day.date();
     return (
       <div onClick={this._onClick} className={classes.trim()}>
-        <span className={'day-text'}>{this.props.day.day.date()}</span>
-        {this.props.children}
+        <div className='day-content'>
+          <span className={'day-text'}>{this.props.day.day.date()}</span>
+          {this.props.children}
+        </div>
       </div>
     );
   }
