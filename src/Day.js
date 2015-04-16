@@ -16,6 +16,7 @@ var Day = React.createClass({
   },
 
   render: function() {
+    console.o
     let classes = this.props.day.classes || '';
     if(typeof this.props.day.classes === 'array'){
       classes = this.props.day.classes.join(' ');
@@ -24,6 +25,7 @@ var Day = React.createClass({
     return (
       <div onClick={this._onClick} className={classes.trim()}>
         <span className={'day-text'}>{this.props.day.day.date()}</span>
+        {this.props.children}
       </div>
     );
   }

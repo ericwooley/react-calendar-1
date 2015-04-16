@@ -18,7 +18,8 @@ var Calendar = React.createClass({
       weekOffset: 0,
       forceSixRows: false,
       showDaysOfWeek: false,
-      onPickDate: null
+      onPickDate: null,
+      dayChildren: {}
     };
   },
   componentWillReceiveProps(nextProps) {
@@ -91,7 +92,11 @@ var Calendar = React.createClass({
     }
     return daysOfWeek;
   },
-
+  getDayChildren(day){
+    if(day.isValid()){
+      return this.props.dayChildren[day.toDate().toDateString()];
+    }
+  },
   render: function() {
     var now = new moment();
     var today = now.format('YYYY-MM-DD');
@@ -112,7 +117,13 @@ var Calendar = React.createClass({
               if(day.day.isSame(today)){
                 day.day.classes.push('today');
               }
-              return <Day key={'day-' + i} day={day} onClick={this.props.onPickDate} />;
+              return <Day
+               key={'day-' + i}
+               day={day}
+               onClick={this.props.onPickDate}
+               >
+               {this.getDayChildren(day.day)}
+               </Day>;
             })}
           </div>
           <div className='clearfix'></div>

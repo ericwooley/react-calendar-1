@@ -7,9 +7,15 @@ function datePicked(date) {
   console.log(date);
 }
 
+let dateMap = {
+
+};
+dateMap[new Date().toDateString()] = React.createElement('span', {}, 'test');
+
 
 React.render(
   <Calendar showDaysOfWeek={true}
+            dayChildren={dateMap}
             date={new Date()}
             onPickDate={datePicked} />,
   document.getElementById('calendar')
