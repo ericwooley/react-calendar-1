@@ -106,7 +106,7 @@ var Calendar = React.createClass({
         <div className='clndr-grid'>
           <div className='day-headers'>
             {this.props.showDaysOfWeek && this.daysOfWeek().map((day, i) => {
-              return <div key={'weekday-' + i}>{day}</div>;
+              return <div key={'weekday-' + i}><div className='day-content'>{day}</div></div>;
             })}
           </div>
           <div className='days'>
