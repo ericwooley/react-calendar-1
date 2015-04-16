@@ -10,8 +10,7 @@
   "scripts": {
     "test": "make test",
     "prepublish": "make publish",
-    "build": "browserify -t [babelify --modules umd ] src/index.js -o dist/bundle.js",
-    "watch": "open examples/basic/index.html && cd examples/basic/ && npm run watch "
+    "build": "jsx --harmony -w src/ lib/"
   },
   "author": "Hanse",
   "license": "MIT",
@@ -24,6 +23,8 @@
     "clndr"
   ],
   "devDependencies": {
+    "moment": "^2.10.2",
+    "react": "^0.13.1",
     "react-tools": "^0.13.1"
   }
 }

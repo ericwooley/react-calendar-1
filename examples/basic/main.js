@@ -1,5 +1,5 @@
 var React = require('react');
-var {Calendar} = require('../../dist/bundle');
+var {Calendar} = require('../../lib/index');
 var moment = require('moment');
 // require('moment/locale/nb');
 
