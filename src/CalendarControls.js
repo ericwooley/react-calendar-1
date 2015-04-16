@@ -15,9 +15,9 @@ var CalendarControls = React.createClass({
   render: function() {
     return (
       <div className='clndr-controls'>
-        <div onClick={this._onPrev}>Prev</div>
+        <div onClick={this._onPrev} className='previous-month'>Prev</div>
         <div className='current-month'>{this.props.date.format('MMMM YYYY')}</div>
-        <div onClick={this._onNext}>Next</div>
+        <div onClick={this._onNext} className='next-month'>Next</div>
       </div>
     );
   }

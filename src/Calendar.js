@@ -60,7 +60,7 @@ var Calendar = React.createClass({
     var numberOfDays = date.daysInMonth();
     for (i = 1; i <= numberOfDays; i++) {
       day = moment([this.state.date.year(), this.state.date.month(), i]);
-      days.push({day: day});
+      days.push({day: day, classes: 'this-month'});
     }
 
     i = 1;
