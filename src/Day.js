@@ -16,10 +16,10 @@ var Day = React.createClass({
   },
 
   render: function() {
-    console.o
-    let classes = this.props.day.classes || '';
-    if(typeof this.props.day.classes === 'array'){
-      classes = this.props.day.classes.join(' ');
+    var classes = this.props.day.day.classes;
+    var classes = classes || '';
+    if(classes instanceof Array){
+      classes = classes.join(' ');
     }
     classes += ' day'+' day-'+this.props.day.day.date();
     return (

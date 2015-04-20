@@ -100,6 +100,7 @@ var Calendar = React.createClass({
   render: function() {
     var now = new moment();
     var today = now.format('YYYY-MM-DD');
+    var baseDate = this.props.date.clone();
     return (
       <div className='clndr'>
         <CalendarControls date={this.state.date} onNext={this.next} onPrev={this.prev} />
@@ -112,12 +113,14 @@ var Calendar = React.createClass({
           <div className='days'>
             {this.days().map((day, i) => {
               day.day.classes = [];
-              if(day.day.isValid())
+              if(day.day.isValid()){
                 day.day.classes.push(day.day.format('YYYY-MM-DD'));
-              if(day.day.isSame(today)){
+              }
+              if(day.day.isSame(today, 'day')){
                 day.day.classes.push('today');
               }
-              if(day.day.isSame(this.props.date)){
+
+              if(day.day.isSame(baseDate, 'day')){
                 day.day.classes.push('selected-date')
               }
               return <Day
