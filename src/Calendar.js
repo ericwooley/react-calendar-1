@@ -113,7 +113,7 @@ var Calendar = React.createClass({
           </div>
           <div className='days'>
             {this.days().map((day, i) => {
-              day.day.classes = [];
+              day.day.classes = [day.classes];
               if(day.day.isValid()){
                 day.day.classes.push(day.day.format('YYYY-MM-DD'));
               }
