@@ -117,6 +117,9 @@ var Calendar = React.createClass({
               if(day.day.isSame(today)){
                 day.day.classes.push('today');
               }
+              if(day.day.isSame(this.props.date)){
+                day.day.classes.push('selected-date')
+              }
               return <Day
                key={'day-' + i}
                day={day}
