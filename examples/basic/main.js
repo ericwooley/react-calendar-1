@@ -16,8 +16,10 @@ var baseDate = new moment();
 React.render(
   <Calendar showDaysOfWeek={true}
             dayChildren={dateMap}
+             forceSixRows={true}
             date={baseDate}
             selectedDate={new moment().add({day: 2})}
-            onPickDate={datePicked} />,
+            onPickDate={datePicked}
+             />,
   document.getElementById('calendar')
 );
