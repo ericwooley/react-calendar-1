@@ -73,11 +73,7 @@ var Calendar = React.createClass({
 
     if (this.props.forceSixRows && days.length !== 42) {
       var start = moment(days[days.length-1].day).add(1, 'days');
-
-      console.log('last day', days[days.length-1])
-      console
       while (days.length < 42) {
-        console.log('new day', moment(start).toDate().toDateString())
         days.push({day: moment(start), classes: 'next-month'});
         start.add(1, 'day');
 
